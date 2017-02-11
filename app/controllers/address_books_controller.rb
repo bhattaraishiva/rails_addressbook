@@ -1,5 +1,6 @@
 class AddressBooksController < ApplicationController
   before_action :set_address_book, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /address_books
   # GET /address_books.json
@@ -14,7 +15,7 @@ class AddressBooksController < ApplicationController
 
   # GET /address_books/new
   def new
-    @address_book = AddressBook.new
+    @address_book = current_user.address_books.build
   end
 
   # GET /address_books/1/edit
@@ -24,7 +25,7 @@ class AddressBooksController < ApplicationController
   # POST /address_books
   # POST /address_books.json
   def create
-    @address_book = AddressBook.new(address_book_params)
+    @address_book = current_user.address_books.build(address_book_params)
 
     respond_to do |format|
       if @address_book.save
@@ -69,6 +70,6 @@ class AddressBooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def address_book_params
-      params.require(:address_book).permit(:first_name, :last_name, :date_of_birth)
+      params.require(:address_book).permit(:first_name, :last_name, :date_of_birth, :user_id, :title_id)
     end
 end

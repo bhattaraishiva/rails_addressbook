@@ -34,10 +34,24 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+  gem 'devise'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'rspec-rails', '~> 3.5'
+  gem 'guard'
+  gem 'spring-commands-rspec'
+  gem 'guard-rspec'
+  gem 'capybara'
+  gem 'factory_girl_rails'
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
+  gem 'ffaker'
+  gem 'simple_bdd'
+  gem 'better_errors'
+  gem 'pry'
+  gem 'pry-nav'
+  gem 'pry-rails'
 end
 
 group :development do
