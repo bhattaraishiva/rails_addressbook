@@ -17,6 +17,17 @@
 </p>
 
 <p>
+  <strong>Phone Number:</strong>
+  <% if @address_book.phone_numbers.any? %>
+    <% @address_book.phone_numbers.each do |phone| %>
+      <%= "#{phone.phone}" %>
+    <% end %>
+  <% else %>
+    <p> not available </p>
+  <% end %>
+</p>
+
+<p>
   <strong>Date of birth:</strong>
   <%= @address_book.date_of_birth %>
 </p>

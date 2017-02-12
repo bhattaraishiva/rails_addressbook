@@ -7,6 +7,7 @@
     <tr>
       <th>Fullname</th>
       <th>Address</th>
+      <th>Phone Number</th>
       <th>Date of birth</th>
       <th colspan="3"></th>
     </tr>
@@ -23,6 +24,15 @@
         <% else %>
           <p> not available </p>
         <% end %>
+
+        <% if address_book.phone_numbers.any? %>
+          <% address_book.phone_numbers.each do |phone| %>
+            <td><%= "#{phone.phone}" %></td>
+          <% end %>
+        <% else %>
+          <p> not available </p>
+        <% end %>
+
         <td><%= address_book.date_of_birth %></td>
         <td><%= link_to 'Show', address_book %></td>
         <td><%= link_to 'Edit', edit_address_book_path(address_book) %></td>
