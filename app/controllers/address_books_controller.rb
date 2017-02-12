@@ -1,6 +1,6 @@
 class AddressBooksController < ApplicationController
   before_action :set_address_book, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except:[:index, :show]
 
   # GET /address_books
   # GET /address_books.json

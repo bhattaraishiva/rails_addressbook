@@ -2,6 +2,13 @@
 
 <h1>Address Books</h1>
 
+  <% if user_signed_in? %>
+    <%= link_to 'Edit Profile', edit_user_registration_path %>
+    <div>
+      <%= image_tag(current_user.picture_user.url(:thumb))%>
+    </div>
+  <% end %>
+
 <table>
   <thead>
     <tr>
@@ -32,11 +39,13 @@
         <% else %>
           <p> not available </p>
         <% end %>
-
         <td><%= address_book.date_of_birth %></td>
+
         <td><%= link_to 'Show', address_book %></td>
-        <td><%= link_to 'Edit', edit_address_book_path(address_book) %></td>
-        <td><%= link_to 'Destroy', address_book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if address_book.user_id == current_user %>
+          <td><%= link_to 'Edit', edit_address_book_path(address_book) %></td>
+          <td><%= link_to 'Destroy', address_book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

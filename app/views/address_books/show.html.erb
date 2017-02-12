@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+<div>
+  <% if user_signed_in? %>
+    <%= image_tag(current_user.picture_user.url(:medium))%>
+  <% end %>
+</div>
+
 <p>
   <strong>Name:</strong>
   <%= @address_book.full_name %>
