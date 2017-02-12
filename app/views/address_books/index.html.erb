@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Fullname</th>
+      <th>Address</th>
       <th>Date of birth</th>
       <th colspan="3"></th>
     </tr>
@@ -15,6 +16,13 @@
     <% @address_books.each do |address_book| %>
       <tr>
         <td><%= address_book.full_name %></td>
+        <% if address_book.addresses.any? %>
+          <% address_book.addresses.each do |a| %>
+            <td><%= "#{a.street}, #{a.city}, #{ a.state}, #{a.zipcode}, #{a.country}" %></td>
+          <% end %>
+        <% else %>
+          <p> not available </p>
+        <% end %>
         <td><%= address_book.date_of_birth %></td>
         <td><%= link_to 'Show', address_book %></td>
         <td><%= link_to 'Edit', edit_address_book_path(address_book) %></td>

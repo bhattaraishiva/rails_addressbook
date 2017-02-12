@@ -1,13 +1,19 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>First name:</strong>
-  <%= @address_book.first_name %>
+  <strong>Name:</strong>
+  <%= @address_book.full_name %>
 </p>
 
 <p>
-  <strong>Last name:</strong>
-  <%= @address_book.last_name %>
+  <strong>Address:</strong>
+  <% if @address_book.addresses.any? %>
+    <% @address_book.addresses.each do |a| %>
+      <%= "#{a.street}, #{a.city}, #{ a.state}, #{a.zipcode}, #{a.country}" %>
+    <% end %>
+  <% else %>
+    <p> not available </p>
+  <% end %>
 </p>
 
 <p>

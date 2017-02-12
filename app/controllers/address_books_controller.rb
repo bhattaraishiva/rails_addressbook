@@ -16,6 +16,7 @@ class AddressBooksController < ApplicationController
   # GET /address_books/new
   def new
     @address_book = current_user.address_books.build
+    @address_book.addresses.build
   end
 
   # GET /address_books/1/edit
@@ -70,6 +71,7 @@ class AddressBooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def address_book_params
-      params.require(:address_book).permit(:first_name, :last_name, :date_of_birth, :user_id, :title_id)
+      params.require(:address_book).permit(:first_name, :last_name, :date_of_birth, :user_id, :title_id,
+      addresses_attributes: [:id, :address_book_id, :street, :city, :state,:zipcode, :country])
     end
 end
