@@ -34,24 +34,16 @@
   <div class="field">
     <%= f.label  "Address" %>
       <%= f.fields_for :addresses do |a| %>
-        <%= a.label :street %>
-        <%= a.text_field :street %>
-        <%= a.label :city %>
-        <%= a.text_field :city %>
-        <%= a.label :state %>
-        <%= a.text_field :state %>
-        <%= a.label :zipcode, "Zip"%>
-        <%= a.text_field :zipcode %>
-        <%= a.label :country %>
-        <%= a.text_field :country %>
+        <%= render 'address_fields', f: a %>
       <% end %>
+    <%= link_to_add_association 'Add Address', f, :addresses%>
   </div>
 
   <div class="field">
     <%= f.fields_for :phone_numbers do |p| %>
-      <%= p.label :phone, "Phone Number"%>
-      <%= p.text_field :phone%>
+      <%= render 'phone_number_fields', f: p %>
     <% end %>
+    <%= link_to_add_association 'Add Phone', f, :phone_numbers %>
   </div>
   <div class="actions">
     <%= f.submit %>

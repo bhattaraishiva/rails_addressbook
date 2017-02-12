@@ -1,0 +1,5 @@
+<div class="phone-numbers">
+  <%= f.label :phone, "Phone Number"%>
+  <%= f.text_field :phone%>
+  <%= link_to_remove_association("Remove phone number", f, {wrapper_class: 'phone-numbers'})%>
+</div>
