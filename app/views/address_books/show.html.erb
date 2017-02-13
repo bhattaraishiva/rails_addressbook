@@ -1,42 +1,27 @@
-<p id="notice"><%= notice %></p>
-
-<div>
-  <% if user_signed_in? %>
-    <%= image_tag(current_user.picture_user.url(:medium))%>
-  <% end %>
+<%- model_class = AddressBook -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @address_book.full_name %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:first_name) %>:</strong></dt>
+  <dd><%= @address_book.first_name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:last_name) %>:</strong></dt>
+  <dd><%= @address_book.last_name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:date_of_birth) %>:</strong></dt>
+  <dd><%= @address_book.date_of_birth %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @address_book.user_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:title_id) %>:</strong></dt>
+  <dd><%= @address_book.title_id %></dd>
+</dl>
 
-<p>
-  <strong>Address:</strong>
-  <% if @address_book.addresses.any? %>
-    <% @address_book.addresses.each do |a| %>
-      <%= "#{a.street}, #{a.city}, #{ a.state}, #{a.zipcode}, #{a.country}" %>
-    <% end %>
-  <% else %>
-    <p> not available </p>
-  <% end %>
-</p>
-
-<p>
-  <strong>Phone Number:</strong>
-  <% if @address_book.phone_numbers.any? %>
-    <% @address_book.phone_numbers.each do |phone| %>
-      <%= "#{phone.phone}" %>
-    <% end %>
-  <% else %>
-    <p> not available </p>
-  <% end %>
-</p>
-
-<p>
-  <strong>Date of birth:</strong>
-  <%= @address_book.date_of_birth %>
-</p>
-
-<%= link_to 'Edit', edit_address_book_path(@address_book) %> |
-<%= link_to 'Back', address_books_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              address_books_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_address_book_path(@address_book), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              address_book_path(@address_book),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
