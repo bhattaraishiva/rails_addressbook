@@ -12,9 +12,10 @@
     </tr>
   </thead>
   <tbody>
+    <% @count = 0 %>
     <% @titles.each do |title| %>
       <tr>
-        <td><%= link_to title.id, title_path(title) %></td>
+        <td><%= @count+= 1 %></td>
         <td><%= title.title %></td>
         <td><%=l title.created_at %></td>
         <td>
