@@ -1,22 +1,34 @@
-<%= form_for(title) do |f| %>
-  <% if title.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(title.errors.count, "error") %> prohibited this title from being saved:</h2>
+<%= form_for @title, :html => { :class => "form-horizontal title" } do |f| %>
 
-      <ul>
-      <% title.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @title.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@title.errors.count, "error") %> prohibited this title from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @title.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+  <div class="form-group">
+    <%= f.label :title, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:title) %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                titles_path, :class => 'btn btn-default' %>
+    </div>
   </div>
+
 <% end %>

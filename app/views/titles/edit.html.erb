@@ -1,6 +1,5 @@
-<h1>Editing Title</h1>
-
-<%= render 'form', title: @title %>
-
-<%= link_to 'Show', @title %> |
-<%= link_to 'Back', titles_path %>
+<%- model_class = Title -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+</div>
+<%= render :partial => 'form' %>

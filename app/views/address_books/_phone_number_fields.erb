@@ -1,5 +1,16 @@
-<div class="phone-numbers">
-  <%= f.label :phone, "Phone Number"%>
-  <%= f.text_field :phone%>
-  <%= link_to_remove_association("Remove phone number", f, {wrapper_class: 'phone-numbers'})%>
+<div class="row">
+  <div class="col-md-4 col-md-offset-2 col-sm-6 col-sm-offset-3 col-xs-5 col-xs-offset-1">
+
+    <div class="phone-numbers">
+      <div class="form-group">
+        <%= f.label :phone %>
+        <%= f.text_field :phone,  :class => 'form-control'%>
+      </div>
+      <%=f.error_span(:phone) %>
+      <div class="form-group">
+        <%= link_to_remove_association("Remove phone number", f, {wrapper_class: 'phone-numbers'})%>
+      </div>
+    </div>
+
+  </div>
 </div>
