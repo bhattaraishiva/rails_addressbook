@@ -57,55 +57,45 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="http://localhost:3000/">Address Book</a>
+
+        <%= link_to 'Address Book', address_books_path, class: 'navbar-brand'%>
+
       </div>
+
       <div style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
-                  Last access : 30 May 2014 &nbsp;
-                  <a href="login.html" class="btn btn-danger square-btn-adjust">Logout
-                  </a>
+                  &nbsp;
+                  <% if !user_signed_in? %>
+                    <%= link_to 'Sign In', new_user_session_path, class:"btn btn-danger square-btn-adjust" %>
+                  <% else %>
+                    <%= link_to 'Edit Profile', edit_user_registration_path, class:"btn btn-info square-btn-adjust" %>
+                    <%= link_to 'Log out', destroy_user_session_path, method: :delete, class:"btn btn-danger square-btn-adjust" %>
+                  <% end %>
+
+
       </div>
     </nav>
     <nav class="navbar-default navbar-side" role="navigation">
       <div class="sidebar-collapse">
         <ul class="nav" id="main-menu">
           <li class="text-center">
-            <img src="assets/img/find_user.png" class="user-image img-responsive"/>
+            <% if user_signed_in? %>
+              <%= image_tag(current_user.picture_user.url(:thumb), class: "user-image img-responsive")%>
+            <% end %>
           </li>
           <li>
-            <a class="active-menu"  href="index.html"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+            <%= link_to 'Home', address_books_path, class: "active-menu fa fa-dashboard fa-2x"%>
           </li>
           <li>
-            <a   href="login.html"><i class="fa fa-bolt fa-3x"></i> Login</a>
-          </li>
-          <li>
-            <a   href="registeration.html"><i class="fa fa-laptop fa-3x"></i> Registeration</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-sitemap fa-3x"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-              <ul class="nav nav-second-level">
-                <li>
-                  <a href="#">Second Level Link</a>
-                </li>
-                <li>
-                  <a href="#">Second Level Link</a>
-                </li>
-                <li>
-                  <a href="#">Second Level Link<span class="fa arrow"></span></a>
-                  <ul class="nav nav-third-level">
-                    <li>
-                      <a href="#">Third Level Link</a>
-                    </li>
-                    <li>
-                      <a href="#">Third Level Link</a>
-                    </li>
-                    <li>
-                      <a href="#">Third Level Link</a>
-                    </li>
 
-                   </ul>
-                 </li>
-               </ul>
-            </li>
+            <%= link_to 'Login', new_user_session_path, class: "fa fa-bolt fa-2x"%>
+          </li>
+          <li>
+            <%= link_to 'Registration', new_user_registration_path, class: "fa fa-laptop fa-2x"%>
+          </li>
+          <li>
+            <%= link_to 'Settings', titles_path, class: "fa fa-cog fa-2x"%>
+          </li>
+
         </ul>
       </div>
     </nav> <!--navbar-default-->
@@ -115,12 +105,6 @@
           <div class="col-md-12">
             <%= bootstrap_flash %>
             <%= yield %>
-            <% if !user_signed_in? %>
-              <%= link_to 'Sign In', new_user_session_path %>
-              <%= link_to 'Sign Up', new_user_registration_path %>
-            <% else %>
-              <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
-            <% end %>
           </div>
 
         </div>
