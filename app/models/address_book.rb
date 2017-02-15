@@ -21,4 +21,14 @@ def full_address
     end
   end
 end
+def self.to_csv
+  attributes = %w{}
+  CSV.generate(header: true) do |csv|
+      csv << column_names
+      all.each do |address_book|
+        csv << address_book.attributes.values_at(*column_names)
+      end
+  end
+end
+
 end

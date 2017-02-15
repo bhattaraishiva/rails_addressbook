@@ -1,76 +1,87 @@
 <%= form_for @address_book, :html => { :class => "form-horizontal address_book" } do |f| %>
-
-  <% if @address_book.errors.any? %>
-    <div id="error_expl" class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@address_book.errors.count, "error") %> prohibited this address_book from being saved:</h3>
-      </div>
-      <div class="panel-body">
-        <ul>
-        <% @address_book.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= f.label :title_id, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-3">
-      <%= f.collection_select :title_id, Title.all, :id, :title, {multiple: false},{class: 'form-control'}%><%= link_to 'Add Title', titles_path %>
-    </div>
-    <%=f.error_span(:title_id) %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :first_name, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :first_name, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:first_name) %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :last_name, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :last_name, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:last_name) %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :date_of_birth, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.date_field :date_of_birth, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:date_of_birth) %>
-  </div>
-
-  <%= f.label  "Address",  :class => 'control-label col-lg-2'%>
-  <div>
-    <br>
-      <%= f.fields_for :addresses do |a| %>
-        <%= render 'address_fields', f: a %>
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <div class="well">
+      <% if @address_book.errors.any? %>
+        <div id="error_expl" class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= pluralize(@address_book.errors.count, "error") %> prohibited this address_book from being saved:</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <% @address_book.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
       <% end %>
+      <div class="form-group">
+        <%= f.label :title_id, :class => 'control-label col-lg-2' %>
+          <div class="col-lg-3">
+            <%= f.collection_select :title_id, Title.all, :id, :title, {multiple: false},{class: 'form-control'}%>
+              <div id = addressbook_link>
+                <%= link_to 'Add Title', titles_path, class: 'addressbook_link' %>
+              </div>
+          </div>
+        <%=f.error_span(:title_id) %>
+      </div>
+
+        <div class="form-group">
+          <%= f.label :first_name, :class => 'control-label col-lg-2' %>
+          <div class="col-lg-10">
+            <%= f.text_field :first_name, :class => 'form-control' %>
+          </div>
+          <%=f.error_span(:first_name) %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :last_name, :class => 'control-label col-lg-2' %>
+          <div class="col-lg-10">
+            <%= f.text_field :last_name, :class => 'form-control' %>
+          </div>
+          <%=f.error_span(:last_name) %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :date_of_birth, :class => 'control-label col-lg-2' %>
+          <div class="col-lg-10">
+            <%= f.date_field :date_of_birth, :class => 'form-control' %>
+          </div>
+          <%=f.error_span(:date_of_birth) %>
+        </div>
+
+        <%= f.label  "Address",  :class => 'control-label col-lg-2'%>
+          <%= f.fields_for :addresses do |a| %>
+            <div class="col-md-4 col-sm-4">
+              <%= render 'address_fields', f: a %>
+            </div>
+        <% end %>
+
+        <div class="form-group">
+            <div id = "addressbook_link">
+            <%= link_to_add_association 'Add Address', f, :addresses, class: 'control-label col-lg-2 addressbook_link' %>
+          </div>
+        </div>
+
+        <%= f.label  "Phone Number",  :class => 'control-label col-lg-2'%>
+          <%= f.fields_for :phone_numbers do |phone| %>
+            <div class="col-md-4 col-sm-4">
+              <%= render 'phone_number_fields', f: phone %>
+            </div>
+        <% end %>
+
+        <div class="form-group">
+          <div id = "addressbook_link">
+            <%= link_to_add_association 'Add phone', f, :phone_numbers, class: 'control-label col-lg-2 addressbook_link' %>
+          </div>
+        </div>
+
+    </div>
   </div>
+</div>
 
-  <div class="form-group">
-    <%= link_to_add_association 'Add Address', f, :addresses,:class => 'control-label col-lg-5' %>
-  </ div>
 
-<br>
-
-  <div class="form-group">
-
-    <%= f.fields_for :phone_numbers do |p| %>
-      <%= render 'phone_number_fields', f: p %>
-    <% end %>
-  </div>
-
-  <div class="form-group">
-    <%= link_to_add_association 'Add Phone', f, :phone_numbers,:class => 'control-label col-lg-5' %>
-  </ div>
 
 
   <div class="form-group">

@@ -6,6 +6,10 @@ class AddressBooksController < ApplicationController
   # GET /address_books.json
   def index
     @address_books = AddressBook.all
+    respond_to do |format|
+      format.html
+      format.csv {send_data @address_books.to_csv}
+    end
   end
 
   # GET /address_books/1
